@@ -1,13 +1,17 @@
 package com.example.listycity;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -26,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> dataList;
     Button addCity;
     Button deleteCity;
-    TextView userInput;
+    LinearLayout footer;
+    EditText userInput;
+    String cityToAdd;
+    Button confirm;
     int selectedIndex = -1;
     
 
@@ -48,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         addCity = findViewById(R.id.add_city);
         deleteCity = findViewById(R.id.delete_city);
         userInput = findViewById(R.id.user_input);
-        userInput.setVisibility(TextView.GONE);
+        footer = findViewById(R.id.footer);
+        confirm = findViewById(R.id.confirm_button);
 
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userInput.setVisibility(TextView.VISIBLE);
+                footer.setVisibility(VISIBLE);
             }
         });
 
@@ -72,6 +80,17 @@ public class MainActivity extends AppCompatActivity {
                     cityAdapter.notifyDataSetChanged();
                     selectedIndex = -1;
                 }
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cityToAdd = userInput.getText().toString();
+                dataList.add(cityToAdd);
+                cityAdapter.notifyDataSetChanged();
+                footer.setVisibility(GONE);
+                userInput.getText().clear();
             }
         });
     }
