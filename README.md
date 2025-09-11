@@ -9,6 +9,7 @@
 
 `https://developer.android.com/develop/ui/views/components/button`
 `https://stackoverflow.com/questions/5551349/2-buttons-side-by-side`
+`https://stackoverflow.com/questions/14891026/get-clicked-item-from-listview`
 
 ## Verbal Collaboration
 
